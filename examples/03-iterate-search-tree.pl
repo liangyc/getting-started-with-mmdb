@@ -8,7 +8,10 @@ use Data::Printer;
 use MaxMind::DB::Reader;
 use Net::Works::Address;
 
-my $reader = MaxMind::DB::Reader->new( file => 'users.mmdb' );
+my $csv_file = $ARGV[0];
+my $reader = MaxMind::DB::Reader->new( file => $csv_file );
+ 
+my $i = 0;
 
 $reader->iterate_search_tree(
     sub {
@@ -18,7 +21,11 @@ $reader->iterate_search_tree(
 
         my $address = Net::Works::Address->new_from_integer(
             integer => $ip_as_integer );
-        say join '/', $address->as_ipv4_string, $mask_length;
-        say np $data;
-    }
+        #say join '/', $address->as_ipv4_string, $mask_length;
+        #say np $data;
+        $i++
+   }
 );
+
+print "start writing to file\n";
+

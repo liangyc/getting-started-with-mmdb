@@ -6,4 +6,4 @@ local
 *.swp
 .tidyall*
 tidyall.ERR
-.vagrant
+*.DS_Store
